@@ -18,4 +18,20 @@ How to implement Swagger in Rest WS
 
         http://localhost:8060/restws/swagger-ui/
         
+How to implement Clover Code coverage report in SonarQube
+
+1. Add Dependency in pom.xml
+2. Add below entry in settings.xml
+
+        <pluginGroups>
+          <!-- Adding Sonar Capability>  -->
+            <pluginGroup>org.openclover</pluginGroup>
+        </pluginGroups>
+3. Run below command before executing maven deploy from terminal
+
+        mvn clean clover:setup test clover:aggregate clover:clover
         
+        
+
+              
+              
