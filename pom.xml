@@ -123,6 +123,21 @@
                 </configuration>
             </plugin>
 
+            <!-- Clover Test Coverage Plugin -->
+            <plugin>
+                <groupId>org.openclover</groupId>
+                <artifactId>clover-maven-plugin</artifactId>
+                <version>4.4.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>instrument</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Sonar Maven Plugin  -->
 
             <plugin>
