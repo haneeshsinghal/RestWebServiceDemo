@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+  <pluginGroups>
+  <!-- Adding Sonar Capability>  -->
+    <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+	<pluginGroup>org.openclover</pluginGroup>
+  </pluginGroups>
+  <proxies>
+    <!-- 
+    <proxy>
+      <id>optional</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <username>proxyuser</username>
+      <password>proxypass</password>
+      <host>proxy.host.net</host>
+      <port>80</port>
+      <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+    </proxy>
+    -->
+  </proxies>
+
+  <!--
+  <servers>
+    
+    <server>
+      <id>deploymentRepo</id>
+      <username>repouser</username>
+      <password>repopwd</password>
+    </server>
+    -->
+    <!-- Another sample, using keys to authenticate.
+    <server>
+      <id>siteServer</id>
+      <privateKey>/path/to/private/key</privateKey>
+      <passphrase>optional; leave empty if not used.</passphrase>
+    </server>    
+  </servers> -->
+  
+  <!-- The below entry is to upload war file into Nexus   -->
+  <servers>
+    <server>
+        <id>snapshots</id>
+        <username>honey</username>
+        <password>Ethopia_786</password>
+    </server>
+    <server>
+        <id>releases</id>
+        <username>honey</username>
+        <password>Ethopia_786</password>
+    </server>
+	<server>
+        <id>local-snapshots</id>
+        <username>honey</username>
+        <password>Ethopia_786</password>
+    </server>
+    <server>
+        <id>local-releases</id>
+        <username>honey</username>
+        <password>Ethopia_786</password>
+    </server>
+</servers>
+
+  <!-- mirrors
+   | This is a list of mirrors to be used in downloading artifacts from remote repositories.
+   |-->
+  <mirrors>
+    <!-- 
+    <mirror>
+      <id>mirrorId</id>
+      <mirrorOf>repositoryId</mirrorOf>
+      <name>Human Readable Name for this Mirror.</name>
+      <url>http://my.repository.com/repo/path</url>
+    </mirror>
+	-->
+  </mirrors>
+  <profiles>
+	<!-- Below code belongs to upload code to SonarQube Server for analysis   -->	
+	<profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.host.url>
+					http://localhost:9000
+                </sonar.host.url>
+				<sonar.login>admin</sonar.login>
+				<sonar.password>admin123</sonar.password>
+				<sonar.sourceEncoding>
+					UTF-8
+				</sonar.sourceEncoding>
+            </properties>
+        </profile>
+  </profiles>
+</settings>
