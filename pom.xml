@@ -19,6 +19,8 @@
         <java.version>11</java.version>
     </properties>
 
+
+
     <dependencies>
         <!-- Spring Boot Dependencies   -->
         <dependency>
@@ -128,6 +130,11 @@
                 <groupId>org.openclover</groupId>
                 <artifactId>clover-maven-plugin</artifactId>
                 <version>4.4.1</version>
+                <configuration>
+                    <generateHtml>false</generateHtml>
+                    <generatePdf>true</generatePdf>
+                    <generateXml>true</generateXml>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
@@ -144,6 +151,13 @@
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.9.1.2184</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.woodstox</groupId>
+                        <artifactId>woodstox-core-lgpl</artifactId>
+                        <version>4.4.1</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <phase>verify</phase>
