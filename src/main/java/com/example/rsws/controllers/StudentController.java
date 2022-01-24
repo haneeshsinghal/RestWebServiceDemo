@@ -8,6 +8,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,8 @@ import java.util.List;
 @RequestMapping("/")
 @Api(tags = "Student Queries", value = "Student")
 public class StudentController {
+
+    Logger logger = LoggerFactory.getLogger(StudentController.class);
 
     private static final String STUDENT_WITH = "Student with ";
     private static final String IS_NOT_FOUND = " is Not Found!";
@@ -39,13 +43,14 @@ public class StudentController {
     )
     @GetMapping(value = "/students", produces = {"application/json;charset=utf-8"})
     public List<Student> getAllStudents() {
-
+        logger.info("Getting all Students List");
         return studentService.getAllStudents();
     }
 
     @ApiOperation(value = "Search a Student with an ID",response = Student.class)
     @GetMapping(value = "/students/{id}", produces = {"application/json;charset=utf-8"})
     public Student getStudentById(@PathVariable("id") @Min(1) int id) {
+        logger.info("Getting student information based on id: "+id);
         return studentService.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException(STUDENT_WITH + id + IS_NOT_FOUND));
     }
@@ -53,12 +58,14 @@ public class StudentController {
     @ApiOperation(value = "Add a Student")
     @PostMapping(value = "/students", produces = {"application/json;charset=utf-8"})
     public Student addStudent(@Valid @RequestBody Student std) {
+        logger.info("Adding student information in database");
         return studentService.save(std);
     }
 
     @ApiOperation(value = "Update a Student")
     @PutMapping(value = "/students/{id}", produces = {"application/json;charset=utf-8"})
     public Student updateStudent(@PathVariable("id") @Min(1) int id, @Valid @RequestBody Student newstd) {
+        logger.info("Updating student info based on given id: "+id);
         Student stdu = studentService.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException(STUDENT_WITH + id + IS_NOT_FOUND));
         stdu.setFirstname(newstd.getFirstname());
@@ -71,6 +78,7 @@ public class StudentController {
     @ApiOperation(value = "Delete a Student")
     @DeleteMapping(value = "/students/{id}", produces = {"application/json;charset=utf-8"})
     public String deleteStudent(@PathVariable("id") @Min(1) int id) {
+        logger.info("Deleting student info from database by given student id: "+id);
         Student std = studentService.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException(STUDENT_WITH + id + IS_NOT_FOUND));
         studentService.deleteById(std.getId());
